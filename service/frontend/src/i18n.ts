@@ -113,99 +113,99 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   zh: {
     nav: {
-      signals: '交易市场',
-      strategies: '策略',
-      discussions: '讨论',
-      positions: '持仓',
-      trade: '交易',
-      exchange: '兑换',
-      create: '发布'
+      signals: "Thị trường",
+      strategies: "Chiến lược",
+      discussions: "Thảo luận",
+      positions: "Vị thế",
+      trade: "Giao dịch",
+      exchange: "Trao đổi",
+      create: "Tạo"
     },
     common: {
-      login: '登录',
-      logout: '登出',
-      connected: '已连接',
-      balance: '余额',
+      login: "Đăng nhập",
+      logout: "Đăng xuất",
+      connected: "Đã kết nối",
+      balance: "Số dư",
       claw: 'CLAW',
-      points: '积分',
-      loading: '加载中...',
-      cancel: '取消',
-      confirm: '确认',
-      submit: '提交',
-      close: '关闭',
-      back: '返回',
-      next: '下一步',
-      refresh: '刷新'
+      points: "điểm",
+      loading: "Đang tải...",
+      cancel: "Hủy",
+      confirm: "Xác nhận",
+      submit: "Gửi",
+      close: "Đóng",
+      back: "Quay lại",
+      next: "Tiếp",
+      refresh: "Làm mới"
     },
     signals: {
-      operations: '操作信号',
-      noSignals: '暂无信号',
-      publish: '发布'
+      operations: "Hoạt động",
+      noSignals: "Chưa có tín hiệu nào",
+      publish: "Xuất bản"
     },
     strategies: {
-      title: '策略',
-      market: '市场',
-      noStrategies: '暂无策略',
-      publish: '发布策略',
-      publishSuccess: '策略发布成功！',
-      submit: '发布',
-      content: '策略内容',
-      symbols: '相关标的',
-      tags: '标签'
+      title: "Chiến lược",
+      market: "Thị trường",
+      noStrategies: "Chưa có chiến lược nào",
+      publish: "Xuất bản Chiến lược",
+      publishSuccess: "Chiến lược đã được xuất bản!",
+      submit: "Xuất bản",
+      content: "Nội dung Chiến lược",
+      symbols: "Các ký hiệu liên quan",
+      tags: "Thẻ"
     },
     discussions: {
-      title: '讨论',
-      market: '市场',
-      noDiscussions: '暂无讨论',
-      post: '发布讨论',
-      postSuccess: '讨论发布成功！',
-      submit: '发布',
-      content: '讨论内容',
-      tags: '标签'
+      title: "Thảo luận",
+      market: "Thị trường",
+      noDiscussions: "Chưa có thảo luận nào",
+      post: "Đăng thảo luận",
+      postSuccess: "Thảo luận đã được đăng!",
+      submit: "Đăng bài",
+      content: "Nội dung thảo luận",
+      tags: "Thẻ"
     },
     positions: {
-      title: '我的持仓',
-      noPositions: '暂无持仓'
+      title: "Vị thế của tôi",
+      noPositions: "Chưa có vị thế nào"
     },
     trade: {
-      title: '下单',
-      market: '市场',
-      action: '操作',
-      symbol: '标的',
-      price: '价格',
-      quantity: '数量',
-      content: '备注',
-      executedAt: '交易时间',
-      submit: '下单',
-      success: '下单成功！',
-      buy: '买入',
-      sell: '卖出',
-      short: '做空',
-      cover: '平空'
+      title: "Đặt lệnh",
+      market: "Thị trường",
+      action: "Hành động",
+      symbol: "Ký hiệu",
+      price: "Giá",
+      quantity: "Số lượng",
+      content: "Ghi chú",
+      executedAt: "Thời gian giao dịch",
+      submit: "Đặt lệnh",
+      success: "Đặt lệnh thành công!",
+      buy: "Mua",
+      sell: "Bán",
+      short: "Bán",
+      cover: "Che phủ"
     },
     exchange: {
-      title: '积分兑换',
-      currentPoints: '当前积分',
-      currentCash: '当前现金',
-      exchangeRate: '汇率：1 积分 = 1,000 USD',
-      amount: '兑换积分数量',
-      submit: '立即兑换',
-      success: '兑换成功！',
-      insufficientPoints: '积分不足',
-      enterAmount: '请输入兑换积分数量'
+      title: "Đổi điểm",
+      currentPoints: "Điểm hiện tại",
+      currentCash: "Tiền mặt hiện tại",
+      exchangeRate: "Tỷ lệ: 1 điểm = 1.000 USD",
+      amount: "Điểm cần đổi",
+      submit: "Đổi ngay",
+      success: "Đổi thành công!",
+      insufficientPoints: "Điểm chưa đủ",
+      enterAmount: "Vui lòng nhập số điểm"
     },
     login: {
-      title: '注册 / 登录',
-      name: '名称',
-      email: '邮箱',
-      register: '注册',
-      registering: '注册中...',
-      success: '登录成功！',
-      failed: '登录失败'
+      title: "Đăng ký / Đăng nhập",
+      name: "Tên",
+      email: "Email",
+      register: "Đăng ký",
+      registering: "Đang đăng ký...",
+      success: "Đăng nhập thành công!",
+      failed: "Đăng nhập thất bại"
     },
     errors: {
-      pleaseLogin: '请先登录',
-      operationFailed: '操作失败'
+      pleaseLogin: "Vui lòng đăng nhập trước",
+      operationFailed: "Thao tác thất bại"
     }
   },
   en: {
@@ -313,12 +313,12 @@ export const getT = (lang: Language): Translations => translations[lang]
 // Category translations
 export const categoryTranslations: Record<Language, Record<string, string>> = {
   zh: {
-    'trading-signal': '交易信号',
-    'data-feed': '数据源',
-    'model-access': '模型访问',
-    'analysis': '分析报告',
-    'tool': '工具',
-    'all': '全部分类'
+    'trading-signal': "Tín hiệu Giao dịch",
+    'data-feed': "Dữ liệu Nguồn",
+    'model-access': "Truy cập Mô hình",
+    'analysis': "Phân tích",
+    'tool': "Công cụ",
+    'all': "Tất cả Thể loại"
   },
   en: {
     'trading-signal': 'Trading Signal',

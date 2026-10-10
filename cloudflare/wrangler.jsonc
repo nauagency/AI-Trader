@@ -1,0 +1,41 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nauagency-ai-trader",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-10",
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "aitrader.nauagency.asia",
+      "custom_domain": true
+    }
+  ],
+  "containers": [
+    {
+      "class_name": "AiTraderContainer",
+      "image": "../Dockerfile",
+      "instance_type": "standard-2",
+      "max_instances": 1
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "AI_TRADER_CONTAINER",
+        "class_name": "AiTraderContainer"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["AiTraderContainer"]
+    }
+  ],
+  "secrets": {
+    "required": ["SITE_USERNAME", "SITE_PASSWORD", "SITE_SESSION_SECRET"]
+  },
+  "observability": {
+    "enabled": true
+  }
+}

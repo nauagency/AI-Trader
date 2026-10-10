@@ -14,7 +14,7 @@ function formatDate(value: string | null | undefined, language: string) {
   if (!value) return '-'
   const parsed = new Date(value)
   if (Number.isNaN(parsed.getTime())) return value
-  return parsed.toLocaleString(language === 'zh' ? 'zh-CN' : 'en-US', {
+  return parsed.toLocaleString(language === 'zh' ? 'vi-VN' : 'en-US', {
     month: '2-digit',
     day: '2-digit',
     hour: '2-digit',
@@ -85,7 +85,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
       setMissions(data.missions || [])
       setError(null)
     } catch (err: any) {
-      setError(err?.message || (language === 'zh' ? 'Team mission 加载失败' : 'Failed to load team missions'))
+      setError(err?.message || (language === 'zh' ? "Không thể tải nhiệm vụ nhóm" : 'Failed to load team missions'))
       setMissions([])
     } finally {
       setLoading(false)
@@ -106,7 +106,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
       setLeaderboard(leaderboardData.leaderboard || [])
       setError(null)
     } catch (err: any) {
-      setError(err?.message || (language === 'zh' ? 'Mission 详情加载失败' : 'Failed to load mission detail'))
+      setError(err?.message || (language === 'zh' ? "Không thể tải chi tiết nhiệm vụ" : 'Failed to load mission detail'))
       setMission(null)
       setLeaderboard([])
     } finally {
@@ -124,7 +124,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
       setTeam(data)
       setError(null)
     } catch (err: any) {
-      setError(err?.message || (language === 'zh' ? 'Team 加载失败' : 'Failed to load team'))
+      setError(err?.message || (language === 'zh' ? "Không thể tải nhóm" : 'Failed to load team'))
       setTeam(null)
     } finally {
       setLoading(false)
@@ -143,7 +143,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
   }, [missionKey, teamKey, status, token])
 
   const authedFetch = async (url: string, body: any = {}) => {
-    if (!token) throw new Error(language === 'zh' ? '请先登录' : 'Login required')
+    if (!token) throw new Error(language === 'zh' ? "Yêu cầu đăng nhập" : 'Login required')
     const res = await fetch(url, {
       method: 'POST',
       headers: {
@@ -183,7 +183,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
       setShowCreate(false)
       await loadList()
     } catch (err: any) {
-      alert(err?.message || (language === 'zh' ? '创建失败' : 'Create failed'))
+      alert(err?.message || (language === 'zh' ? "Tạo thất bại" : 'Create failed'))
     } finally {
       setBusy(false)
     }
@@ -195,7 +195,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
       await authedFetch(`${API_BASE}/team-missions/${key}/join`, {})
       await Promise.all([loadMine(), missionKey ? loadMission() : loadList()])
     } catch (err: any) {
-      alert(err?.message || (language === 'zh' ? '加入失败' : 'Join failed'))
+      alert(err?.message || (language === 'zh' ? "Tham gia thất bại" : 'Join failed'))
     } finally {
       setBusy(false)
     }
@@ -210,7 +210,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
       setTeamForm({ name: '', role: 'lead' })
       await Promise.all([loadMission(), loadMine()])
     } catch (err: any) {
-      alert(err?.message || (language === 'zh' ? '创建 team 失败' : 'Failed to create team'))
+      alert(err?.message || (language === 'zh' ? "Tạo nhóm thất bại" : 'Failed to create team'))
     } finally {
       setBusy(false)
     }
@@ -225,7 +225,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
       })
       await loadMission()
     } catch (err: any) {
-      alert(err?.message || (language === 'zh' ? '自动组队失败' : 'Auto-form failed'))
+      alert(err?.message || (language === 'zh' ? "Tự tạo thất bại" : 'Auto-form failed'))
     } finally {
       setBusy(false)
     }
@@ -244,7 +244,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
       setSubmissionForm({ title: '', content: '', confidence: '0.7' })
       await loadTeam()
     } catch (err: any) {
-      alert(err?.message || (language === 'zh' ? '提交失败' : 'Submit failed'))
+      alert(err?.message || (language === 'zh' ? "Gửi thất bại" : 'Submit failed'))
     } finally {
       setBusy(false)
     }
@@ -262,7 +262,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
       setSignalLinkForm({ signal_id: '', message_type: 'discussion' })
       await loadTeam()
     } catch (err: any) {
-      alert(err?.message || (language === 'zh' ? '绑定失败' : 'Link failed'))
+      alert(err?.message || (language === 'zh' ? "Liên kết thất bại" : 'Link failed'))
     } finally {
       setBusy(false)
     }
@@ -275,7 +275,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
   if (teamKey && team) {
     return (
       <div className="team-page">
-        <Link to={`/team-missions/${team.mission.mission_key}`} className="back-button">← {language === 'zh' ? '返回 Mission' : 'Back to mission'}</Link>
+        <Link to={`/team-missions/${team.mission.mission_key}`} className="back-button">← {language === 'zh' ? "Quay lại nhiệm vụ" : 'Back to mission'}</Link>
         <section className="team-hero">
           <div>
             <div className="team-kicker">
@@ -290,7 +290,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
 
         <div className="team-grid">
           <section className="team-panel">
-            <div className="team-section-header"><h2>{language === 'zh' ? '成员与角色' : 'Members and Roles'}</h2></div>
+            <div className="team-section-header"><h2>{language === 'zh' ? "Thành viên và Vai trò" : 'Members and Roles'}</h2></div>
             <div className="team-member-list">
               {(team.members || []).map((member: any) => (
                 <div key={member.id} className="team-member-row">
@@ -305,23 +305,23 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
           </section>
 
           <section className="team-panel">
-            <div className="team-section-header"><h2>{language === 'zh' ? '提交团队结论' : 'Submit Team Conclusion'}</h2></div>
+            <div className="team-section-header"><h2>{language === 'zh' ? "Gửi Kết luận Nhóm" : 'Submit Team Conclusion'}</h2></div>
             {token ? (
               <form className="team-form" onSubmit={handleSubmitTeam}>
-                <input className="form-input" value={submissionForm.title} onChange={(event) => setSubmissionForm({ ...submissionForm, title: event.target.value })} placeholder={language === 'zh' ? '结论标题' : 'Submission title'} required />
-                <textarea className="form-textarea" value={submissionForm.content} onChange={(event) => setSubmissionForm({ ...submissionForm, content: event.target.value })} placeholder={language === 'zh' ? '团队共识、预测和证据' : 'Consensus, prediction, and evidence'} required />
+                <input className="form-input" value={submissionForm.title} onChange={(event) => setSubmissionForm({ ...submissionForm, title: event.target.value })} placeholder={language === 'zh' ? "Tiêu đề nộp bài" : 'Submission title'} required />
+                <textarea className="form-textarea" value={submissionForm.content} onChange={(event) => setSubmissionForm({ ...submissionForm, content: event.target.value })} placeholder={language === 'zh' ? "Đồng thuận, dự đoán và bằng chứng" : 'Consensus, prediction, and evidence'} required />
                 <input className="form-input" type="number" min="0" max="1" step="0.05" value={submissionForm.confidence} onChange={(event) => setSubmissionForm({ ...submissionForm, confidence: event.target.value })} />
-                <button className="btn btn-primary" disabled={busy} type="submit">{language === 'zh' ? '提交' : 'Submit'}</button>
+                <button className="btn btn-primary" disabled={busy} type="submit">{language === 'zh' ? "Gửi" : 'Submit'}</button>
               </form>
             ) : (
-              <Link className="btn btn-secondary" to="/login">{language === 'zh' ? '登录后提交' : 'Login to submit'}</Link>
+              <Link className="btn btn-secondary" to="/login">{language === 'zh' ? "Đăng nhập để nộp bài" : 'Login to submit'}</Link>
             )}
           </section>
         </div>
 
         <div className="team-grid">
           <section className="team-panel">
-            <div className="team-section-header"><h2>{language === 'zh' ? '公开信号绑定' : 'Linked Public Signals'}</h2></div>
+            <div className="team-section-header"><h2>{language === 'zh' ? "Tín hiệu công khai liên kết" : 'Linked Public Signals'}</h2></div>
             {token && (
               <form className="team-link-form" onSubmit={handleLinkSignal}>
                 <input className="form-input" type="number" value={signalLinkForm.signal_id} onChange={(event) => setSignalLinkForm({ ...signalLinkForm, signal_id: event.target.value })} placeholder="signal_id" required />
@@ -329,7 +329,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
                   <option value="discussion">discussion</option>
                   <option value="strategy">strategy</option>
                 </select>
-                <button className="btn btn-secondary" disabled={busy} type="submit">{language === 'zh' ? '绑定' : 'Link'}</button>
+                <button className="btn btn-secondary" disabled={busy} type="submit">{language === 'zh' ? "Liên kết" : 'Link'}</button>
               </form>
             )}
             <div className="team-message-list">
@@ -346,7 +346,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
           </section>
 
           <section className="team-panel">
-            <div className="team-section-header"><h2>{language === 'zh' ? '团队提交' : 'Team Submissions'}</h2></div>
+            <div className="team-section-header"><h2>{language === 'zh' ? "Bài nộp của Nhóm" : 'Team Submissions'}</h2></div>
             <div className="team-submission-list">
               {(team.submissions || []).map((submission: any) => (
                 <article key={submission.id} className="team-submission-item">
@@ -366,7 +366,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
     const isJoined = joinedMissionIds.has(mission.id)
     return (
       <div className="team-page">
-        <Link to="/team-missions" className="back-button">← {language === 'zh' ? '返回 Mission 列表' : 'Back to missions'}</Link>
+        <Link to="/team-missions" className="back-button">← {language === 'zh' ? "Quay lại các nhiệm vụ" : 'Back to missions'}</Link>
         <section className="team-hero">
           <div>
             <div className="team-kicker">
@@ -381,11 +381,11 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
             {token && mission.status !== 'settled' && (
               <>
                 <button className="btn btn-primary" disabled={busy || isJoined} onClick={() => handleJoinMission(mission.mission_key)}>
-                  {isJoined ? (language === 'zh' ? '已加入' : 'Joined') : (language === 'zh' ? '加入 Mission' : 'Join mission')}
+                  {isJoined ? (language === 'zh' ? "Đã tham gia" : 'Joined') : (language === 'zh' ? "Tham gia nhiệm vụ" : 'Join mission')}
                 </button>
                 {canAdmin && (
                   <button className="btn btn-secondary" disabled={busy} onClick={handleAutoForm}>
-                    {language === 'zh' ? '自动组队' : 'Auto-form teams'}
+                    {language === 'zh' ? "Tự động tạo nhóm" : 'Auto-form teams'}
                   </button>
                 )}
               </>
@@ -394,10 +394,10 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
         </section>
 
         <section className="team-metrics">
-          <div><span>{language === 'zh' ? '报名 Agent' : 'Participants'}</span><strong>{mission.participant_count || 0}</strong></div>
-          <div><span>{language === 'zh' ? 'Teams' : 'Teams'}</span><strong>{mission.team_count || 0}</strong></div>
-          <div><span>{language === 'zh' ? '队伍规模' : 'Team size'}</span><strong>{mission.team_size_min}-{mission.team_size_max}</strong></div>
-          <div><span>{language === 'zh' ? '截止' : 'Due'}</span><strong>{formatDate(mission.submission_due_at, language)}</strong></div>
+          <div><span>{language === 'zh' ? "Người tham gia" : 'Participants'}</span><strong>{mission.participant_count || 0}</strong></div>
+          <div><span>{language === 'zh' ? "Nhóm" : 'Teams'}</span><strong>{mission.team_count || 0}</strong></div>
+          <div><span>{language === 'zh' ? "Kích thước nhóm" : 'Team size'}</span><strong>{mission.team_size_min}-{mission.team_size_max}</strong></div>
+          <div><span>{language === 'zh' ? "Hạn chót" : 'Due'}</span><strong>{formatDate(mission.submission_due_at, language)}</strong></div>
         </section>
 
         <div className="team-grid">
@@ -409,14 +409,14 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
                   <div>
                     <Link to={`/teams/${item.team_key}`} className="team-list-title">{item.name}</Link>
                     <div className="team-list-meta">
-                      <span>{item.member_count || 0} {language === 'zh' ? '成员' : 'members'}</span>
+                      <span>{item.member_count || 0} {language === 'zh' ? "thành viên" : 'members'}</span>
                       <span>{item.formation_method}</span>
                       <span>{item.status}</span>
                     </div>
                   </div>
                   {token && mission.status !== 'settled' && (
                     <button className="btn btn-ghost" disabled={busy} onClick={() => authedFetch(`${API_BASE}/teams/${item.team_key}/join`, {}).then(() => loadMission()).catch((err) => alert(err.message))}>
-                      {language === 'zh' ? '加入 Team' : 'Join team'}
+                      {language === 'zh' ? "Tham gia đội" : 'Join team'}
                     </button>
                   )}
                 </article>
@@ -425,35 +425,35 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
           </section>
 
           <aside className="team-panel">
-            <div className="team-section-header"><h2>{language === 'zh' ? '手动创建 Team' : 'Create Team'}</h2></div>
+            <div className="team-section-header"><h2>{language === 'zh' ? "Tạo Nhóm" : 'Create Team'}</h2></div>
             {token ? (
               <form className="team-form" onSubmit={handleCreateTeam}>
-                <input className="form-input" value={teamForm.name} onChange={(event) => setTeamForm({ ...teamForm, name: event.target.value })} placeholder={language === 'zh' ? 'Team 名称' : 'Team name'} />
+                <input className="form-input" value={teamForm.name} onChange={(event) => setTeamForm({ ...teamForm, name: event.target.value })} placeholder={language === 'zh' ? "Tên đội" : 'Team name'} />
                 <select className="form-input" value={teamForm.role} onChange={(event) => setTeamForm({ ...teamForm, role: event.target.value })}>
                   {(mission.required_roles || ['lead', 'analyst', 'risk', 'scribe']).map((role: string) => (
                     <option key={role} value={role}>{role}</option>
                   ))}
                 </select>
-                <button className="btn btn-primary" disabled={busy} type="submit">{language === 'zh' ? '创建' : 'Create'}</button>
+                <button className="btn btn-primary" disabled={busy} type="submit">{language === 'zh' ? "Tạo" : 'Create'}</button>
               </form>
             ) : (
-              <Link className="btn btn-secondary" to="/login">{language === 'zh' ? '登录后创建' : 'Login to create'}</Link>
+              <Link className="btn btn-secondary" to="/login">{language === 'zh' ? "Đăng nhập để tạo" : 'Login to create'}</Link>
             )}
           </aside>
         </div>
 
         <section className="team-panel">
-          <div className="team-section-header"><h2>{language === 'zh' ? 'Team Leaderboard' : 'Team Leaderboard'}</h2></div>
+          <div className="team-section-header"><h2>{language === 'zh' ? "Bảng xếp hạng nhóm" : 'Team Leaderboard'}</h2></div>
           <div className="team-leaderboard">
             {leaderboard.length === 0 ? (
-              <div className="empty-state"><div className="empty-title">{language === 'zh' ? '暂无排名' : 'No leaderboard yet'}</div></div>
+              <div className="empty-state"><div className="empty-title">{language === 'zh' ? "Chưa có bảng xếp hạng" : 'No leaderboard yet'}</div></div>
             ) : leaderboard.map((row) => (
               <div key={row.team_id} className="team-rank-row">
                 <span>#{row.rank}</span>
                 <strong>{row.team_name || row.team_key}</strong>
-                <span>{language === 'zh' ? '最终分' : 'Final'} {formatScore(row.final_score)}</span>
-                <span>{language === 'zh' ? '质量' : 'Quality'} {formatScore(row.quality_score)}</span>
-                <span>{language === 'zh' ? '共识' : 'Consensus'} {formatScore(row.consensus_gain)}</span>
+                <span>{language === 'zh' ? "Cuối cùng" : 'Final'} {formatScore(row.final_score)}</span>
+                <span>{language === 'zh' ? "Chất lượng" : 'Quality'} {formatScore(row.quality_score)}</span>
+                <span>{language === 'zh' ? "Đồng thuận" : 'Consensus'} {formatScore(row.consensus_gain)}</span>
               </div>
             ))}
           </div>
@@ -466,12 +466,12 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
     <div className="team-page">
       <div className="header">
         <div>
-          <h1 className="header-title">{language === 'zh' ? 'Team Missions' : 'Team Missions'}</h1>
+          <h1 className="header-title">{language === 'zh' ? "Nhiệm vụ Nhóm" : 'Team Missions'}</h1>
           <p className="header-subtitle">
-            {language === 'zh' ? '组队、分工、协作提交和贡献结算的实验工作台' : 'An experiment workspace for teams, roles, submissions, and contribution scoring'}
+            {language === 'zh' ? "Một không gian thí nghiệm cho các nhóm, vai trò, bài nộp và đánh giá đóng góp" : 'An experiment workspace for teams, roles, submissions, and contribution scoring'}
           </p>
         </div>
-        {token && canAdmin && <button className="btn btn-primary" onClick={() => setShowCreate(!showCreate)}>{language === 'zh' ? '创建 Mission' : 'Create mission'}</button>}
+        {token && canAdmin && <button className="btn btn-primary" onClick={() => setShowCreate(!showCreate)}>{language === 'zh' ? "Tạo nhiệm vụ" : 'Create mission'}</button>}
       </div>
 
       <div className="team-tabs">
@@ -485,7 +485,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
       {canAdmin && showCreate && (
         <section className="team-panel">
           <form className="team-create-grid" onSubmit={handleCreateMission}>
-            <input className="form-input" value={createForm.title} onChange={(event) => setCreateForm({ ...createForm, title: event.target.value })} placeholder={language === 'zh' ? 'Mission 标题' : 'Mission title'} required />
+            <input className="form-input" value={createForm.title} onChange={(event) => setCreateForm({ ...createForm, title: event.target.value })} placeholder={language === 'zh' ? "Tiêu đề nhiệm vụ" : 'Mission title'} required />
             <input className="form-input" value={createForm.mission_key} onChange={(event) => setCreateForm({ ...createForm, mission_key: event.target.value })} placeholder="mission-key" />
             <select className="form-input" value={createForm.market} onChange={(event) => setCreateForm({ ...createForm, market: event.target.value })}>
               {MARKETS.filter((market) => market.value !== 'all' && market.supported).map((market) => (
@@ -501,7 +501,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
             <input className="form-input" type="number" min="1" value={createForm.team_size_min} onChange={(event) => setCreateForm({ ...createForm, team_size_min: event.target.value })} />
             <input className="form-input" type="number" min="1" value={createForm.team_size_max} onChange={(event) => setCreateForm({ ...createForm, team_size_max: event.target.value })} />
             <input className="form-input" type="datetime-local" value={createForm.submission_due_at} onChange={(event) => setCreateForm({ ...createForm, submission_due_at: event.target.value })} />
-            <button className="btn btn-primary" disabled={busy} type="submit">{language === 'zh' ? '保存' : 'Save'}</button>
+            <button className="btn btn-primary" disabled={busy} type="submit">{language === 'zh' ? "Lưu" : 'Save'}</button>
           </form>
         </section>
       )}
@@ -509,7 +509,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
       {error && <div className="card" style={{ color: 'var(--error)' }}>{error}</div>}
 
       {missions.length === 0 ? (
-        <div className="empty-state"><div className="empty-title">{language === 'zh' ? '暂无 Mission' : 'No missions yet'}</div></div>
+        <div className="empty-state"><div className="empty-title">{language === 'zh' ? "Chưa có nhiệm vụ nào" : 'No missions yet'}</div></div>
       ) : (
         <div className="team-list">
           {missions.map((item) => {
@@ -524,7 +524,7 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
                   </div>
                   <Link to={`/team-missions/${item.mission_key}`} className="team-list-title">{item.title}</Link>
                   <div className="team-list-meta">
-                    <span>{item.participant_count || 0} {language === 'zh' ? '报名' : 'participants'}</span>
+                    <span>{item.participant_count || 0} {language === 'zh' ? "người tham gia" : 'participants'}</span>
                     <span>{item.team_count || 0} teams</span>
                     <span>{formatDate(item.submission_due_at, language)}</span>
                   </div>
@@ -532,10 +532,10 @@ export function TeamMissionsPage({ token, canAdmin = false }: TeamMissionsPagePr
                 <div className="team-actions">
                   {token && item.status !== 'settled' && (
                     <button className="btn btn-secondary" disabled={busy || isJoined} onClick={() => handleJoinMission(item.mission_key)}>
-                      {isJoined ? (language === 'zh' ? '已加入' : 'Joined') : (language === 'zh' ? '加入' : 'Join')}
+                      {isJoined ? (language === 'zh' ? "Đã tham gia" : 'Joined') : (language === 'zh' ? "Tham gia" : 'Join')}
                     </button>
                   )}
-                  <Link className="btn btn-ghost" to={`/team-missions/${item.mission_key}`}>{language === 'zh' ? '打开' : 'Open'}</Link>
+                  <Link className="btn btn-ghost" to={`/team-missions/${item.mission_key}`}>{language === 'zh' ? "Mở" : 'Open'}</Link>
                 </div>
               </article>
             )

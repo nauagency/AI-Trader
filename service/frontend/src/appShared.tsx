@@ -113,10 +113,10 @@ function parseRecordedAt(recordedAt: string) {
 }
 
 export function formatIntelTimestamp(timestamp: string | null | undefined, language: Language) {
-  if (!timestamp) return language === 'zh' ? '暂无快照' : 'No snapshot yet'
+  if (!timestamp) return language === 'zh' ? "Chưa có ảnh chụp" : 'No snapshot yet'
   const parsed = parseRecordedAt(timestamp)
-  if (!parsed) return language === 'zh' ? '时间未知' : 'Unknown time'
-  const formatted = parsed.toLocaleString(language === 'zh' ? 'zh-CN' : 'en-US', {
+  if (!parsed) return language === 'zh' ? "Thời gian không xác định" : 'Unknown time'
+  const formatted = parsed.toLocaleString(language === 'zh' ? 'vi-VN' : 'en-US', {
     month: 'short',
     day: 'numeric',
     hour: '2-digit',
@@ -136,14 +136,14 @@ export function formatIntelNumber(value: number | null | undefined, digits = 2) 
 
 function formatLeaderboardLabel(date: Date, chartRange: LeaderboardChartRange, language: Language) {
   if (chartRange === '24h') {
-    return date.toLocaleTimeString(language === 'zh' ? 'zh-CN' : 'en-US', {
+    return date.toLocaleTimeString(language === 'zh' ? 'vi-VN' : 'en-US', {
       hour: '2-digit',
       minute: '2-digit',
       hour12: false
     })
   }
 
-  return date.toLocaleDateString(language === 'zh' ? 'zh-CN' : 'en-US', {
+  return date.toLocaleDateString(language === 'zh' ? 'vi-VN' : 'en-US', {
     month: 'short',
     day: 'numeric'
   })
@@ -320,14 +320,14 @@ export type MarketIntelNewsCategory = {
 }
 
 export const MARKETS = [
-  { value: 'all', label: 'All', labelZh: '全部', supported: true },
-  { value: 'us-stock', label: 'US Stock', labelZh: '美股', supported: true },
-  { value: 'crypto', label: 'Crypto (Testing)', labelZh: '加密货币（测试中）', supported: true },
-  { value: 'a-stock', label: 'A-Share (Developing)', labelZh: 'A股（开发中）', supported: false },
-  { value: 'polymarket', label: 'Polymarket (Testing)', labelZh: '预测市场（测试中）', supported: true },
-  { value: 'forex', label: 'Forex (Developing)', labelZh: '外汇（开发中）', supported: false },
-  { value: 'options', label: 'Options (Developing)', labelZh: '期权（开发中）', supported: false },
-  { value: 'futures', label: 'Futures (Developing)', labelZh: '期货（开发中）', supported: false },
+  { value: 'all', label: 'All', labelZh: 'Tất cả', supported: true },
+  { value: 'us-stock', label: 'US Stock', labelZh: 'Cổ phiếu Mỹ', supported: true },
+  { value: 'crypto', label: 'Crypto (Testing)', labelZh: 'Tiền mã hóa (Thử nghiệm)', supported: true },
+  { value: 'a-stock', label: 'A-Share (Developing)', labelZh: 'Cổ phiếu A (Đang phát triển)', supported: false },
+  { value: 'polymarket', label: 'Polymarket (Testing)', labelZh: 'Thị trường dự đoán (Thử nghiệm)', supported: true },
+  { value: 'forex', label: 'Forex (Developing)', labelZh: 'Ngoại hối (Đang phát triển)', supported: false },
+  { value: 'options', label: 'Options (Developing)', labelZh: 'Quyền chọn (Đang phát triển)', supported: false },
+  { value: 'futures', label: 'Futures (Developing)', labelZh: 'Hợp đồng tương lai (Đang phát triển)', supported: false },
 ]
 
 export function isUSMarketOpen(): boolean {
