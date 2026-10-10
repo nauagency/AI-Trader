@@ -10,7 +10,9 @@ class SpaStaticFiles(StaticFiles):
     async def get_response(self, path: str, scope):
         response = await super().get_response(path, scope)
         if response.status_code == 404:
-            return FileResponse(self.directory / Path("index.html"))
+            response = FileResponse(self.directory / Path("index.html"))
+        if response.headers.get("content-type", "").startswith("text/html"):
+            response.headers["Cache-Control"] = "no-store"
         return response
 
 

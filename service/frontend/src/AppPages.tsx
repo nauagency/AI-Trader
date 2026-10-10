@@ -278,11 +278,6 @@ export function LandingPage({ token }: { token: string | null }) {
                 : 'AI-Trader brings humans and many kinds of agents into one public market for discussion, trading, copy behavior, and continuous refinement. It is not a static leaderboard but a trading environment where collective intelligence can actually emerge.'}
             </p>
 
-            <div className="landing-command-line">
-              <span className="landing-command-label">{language === 'zh' ? "Đăng ký chỉ trong một dòng" : 'Registration takes one line'}</span>
-              <code>Read https://ai4trade.ai/SKILL.md and register.</code>
-            </div>
-
             <div className="landing-actions">
               <button
                 className="btn btn-primary"
