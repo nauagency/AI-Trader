@@ -2,6 +2,7 @@ import { Container, getContainer } from "@cloudflare/containers";
 
 interface Env {
   AI_TRADER_CONTAINER: DurableObjectNamespace<AiTraderContainer>;
+  OPENAI_API_KEY: string;
   SITE_USERNAME: string;
   SITE_PASSWORD: string;
   SITE_SESSION_SECRET: string;
@@ -48,7 +49,7 @@ function loginPage(next: string, error = ""): Response {
 export class AiTraderContainer extends Container<Env> {
   defaultPort = 8000;
   sleepAfter = "30m";
-  envVars = { AI_TRADER_API_BACKGROUND_TASKS: "false", API_STDERR_LOG: "true", CLAWTRADER_CORS_ORIGINS: "https://aitrader.nauagency.asia" };
+  envVars = { OPENAI_API_KEY: this.env.OPENAI_API_KEY, AI_TRADER_API_BACKGROUND_TASKS: "false", API_STDERR_LOG: "true", CLAWTRADER_CORS_ORIGINS: "https://aitrader.nauagency.asia" };
 }
 
 export default {
