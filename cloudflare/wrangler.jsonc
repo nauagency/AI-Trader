@@ -33,7 +33,7 @@
     }
   ],
   "secrets": {
-    "required": ["OPENAI_API_KEY", "SITE_USERNAME", "SITE_PASSWORD", "SITE_SESSION_SECRET"]
+    "required": ["OPENAI_API_KEY", "SITE_USERNAME", "SITE_PASSWORD", "SITE_SESSION_SECRET", "VIBE_BRIDGE_SECRET"]
   },
   "observability": {
     "enabled": true

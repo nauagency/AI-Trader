@@ -6,6 +6,7 @@ interface Env {
   SITE_USERNAME: string;
   SITE_PASSWORD: string;
   SITE_SESSION_SECRET: string;
+  VIBE_BRIDGE_SECRET: string;
 }
 
 const COOKIE_NAME = "nau_ai_auth";
@@ -49,12 +50,20 @@ function loginPage(next: string, error = ""): Response {
 export class AiTraderContainer extends Container<Env> {
   defaultPort = 8000;
   sleepAfter = "30m";
-  envVars = { OPENAI_API_KEY: this.env.OPENAI_API_KEY, AI_TRADER_API_BACKGROUND_TASKS: "false", API_STDERR_LOG: "true", CLAWTRADER_CORS_ORIGINS: "https://aitrader.nauagency.asia" };
+  envVars = { OPENAI_API_KEY: this.env.OPENAI_API_KEY, VIBE_BRIDGE_SECRET: this.env.VIBE_BRIDGE_SECRET, AI_TRADER_API_BACKGROUND_TASKS: "false", API_STDERR_LOG: "true", CLAWTRADER_CORS_ORIGINS: "https://aitrader.nauagency.asia" };
 }
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
+    if (url.pathname === "/api/integrations/vibe/runs" && request.method === "POST") {
+      const bridgeKey = request.headers.get("x-vibe-bridge-key") ?? "";
+      if (!sameText(bridgeKey, env.VIBE_BRIDGE_SECRET)) return new Response("Unauthorized", { status: 401 });
+      const headers = new Headers(request.headers);
+      headers.delete("x-vibe-bridge-key");
+      headers.set("x-vibe-bridge-validated", "cloudflare-worker");
+      return getContainer(env.AI_TRADER_CONTAINER, "primary").fetch(new Request(request, { headers }));
+    }
     if (url.pathname === "/__nau/login" && request.method === "POST") {
       const form = await request.formData();
       const username = String(form.get("username") ?? "");

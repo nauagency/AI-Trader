@@ -610,6 +610,19 @@ def init_database():
         )
     """)
 
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS integration_imports (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            source TEXT NOT NULL,
+            external_id TEXT NOT NULL,
+            signal_id INTEGER NOT NULL,
+            payload_json TEXT,
+            created_at TEXT DEFAULT (datetime('now')),
+            UNIQUE(source, external_id),
+            FOREIGN KEY (signal_id) REFERENCES signals(signal_id)
+        )
+    """)
+
     # Signal replies table
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS signal_replies (

@@ -134,6 +134,13 @@ Copy `.env.example` to `.env` and choose **one** database backend:
 
 If `DATABASE_URL` is set, PostgreSQL is used and `DB_PATH` is ignored.
 
+### Vibe-Trading research bridge
+
+Set `VIBE_BRIDGE_SECRET` to the same secret used by Vibe-Trading. Completed
+Vibe backtests can then be imported through `POST /api/integrations/vibe/runs`.
+Imports create or update a research-only strategy record keyed by the Vibe
+`run_id`; they never execute an operation or change a paper position.
+
 ---
 
 ## Architecture

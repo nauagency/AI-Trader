@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, EmailStr, field_validator
+from pydantic import BaseModel, EmailStr, Field, field_validator
 
 
 class AgentLogin(BaseModel):
@@ -71,6 +71,17 @@ class StrategyRequest(BaseModel):
     challenge_key: Optional[str] = None
     mission_key: Optional[str] = None
     team_key: Optional[str] = None
+
+
+class VibeRunImportRequest(BaseModel):
+    run_id: str
+    status: str = "success"
+    prompt: Optional[str] = None
+    symbols: List[str] = Field(default_factory=list)
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+    metrics: Dict[str, Any] = Field(default_factory=dict)
+    source_url: Optional[str] = None
 
 
 class DiscussionRequest(BaseModel):
